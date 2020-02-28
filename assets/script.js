@@ -1,14 +1,71 @@
-var questionNum = document.querySelector(".question-number");
-var questionCont = document.querySelector(".question-content");
-var answerOne = document.querySelector(".answer-one");
-var answerTwo = document.querySelector(".answer-two");
-var answerThree = document.querySelector(".answer-three");
-var answerFour = document.querySelector(".answer-four");
+var questionCont = document.getElementById("question-content");
 
+var answerOptions = document.getElementById("answer-options");
+// var answerTwo = document.querySelector("#answer-two");
+// var answerThree = document.querySelector("#answer-three");
+// var answerFour = document.querySelector("#answer-four");
+
+var myQuestions = [
+    {
+        question: 'Where was I born?',
+        potentialAnswers: [
+            {
+                id: 'a',
+                answer: 'Evanston, IL'
+            },
+            {
+                id: 'b',
+                answer: 'Milwaukee, WI'
+            },
+            {
+                id: 'c',
+                answer: 'Gary, IN'
+            },
+            {
+                id: 'd',
+                answer: "Park Ridge, IL"
+            }
+        ],
+        correctAnswer: 'a'
+    },
+    {
+        question: 'Where did I get my Bachelors Degreee?',
+        potentialAnswers: [
+            {
+                id: 'a',
+                answer: 'DePaul University'
+            },
+            {
+                id: 'b',
+                answer: 'Roosevelt University'
+            },
+            {
+                id: 'c',
+                answer: 'Vanderbilt University'
+            },
+            {
+                id: 'd',
+                answer: 'Illinois State University'
+            }
+        ],
+        correctAnswer: 'b'
+    }
+]
 
 function renderQuestions () {
 
+    for (i=0; i < myQuestions.length; i++) {
+        questionCont.innerHTML = myQuestions[i].question;
+
+        // var listAnswers = document.createElement('li');
+
+        // document.answerOptions.appendChild(listAnswers);
+
+        answerOptions.innerHTML = myQuestions[i].potentialAnswers;
+    }
 }
+
+renderQuestions();
 
 
 function quizTimer() {
@@ -28,12 +85,6 @@ function quizTimer() {
   }
 
 quizTimer();
-// question 1: "blah blah blah";
-
-// answerA: "asdfg";
-// answerB: "asdfgh";
-// answerC: "keurgesjb";
-// answerD: "mnbv";
 
 // pseudo code:
 //first i need to grab the classes that i want to populate my questions into from the html - still deciding if i need a card for this or if i should just create li tags in a <ul> within a plain column
@@ -45,3 +96,5 @@ quizTimer();
 //the quiz must end when the timer reaches 0, regardless of if all questions have been answered or not
 
 //key research points: high score page (storing user scores with inputted names in the app), 
+//keep functions at the top
+//if timer is 0 then stop the function

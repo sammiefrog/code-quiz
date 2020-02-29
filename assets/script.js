@@ -49,18 +49,30 @@ var myQuestions = [
     }
 ]
 
+
 function renderQuestions () {
     questionCont.innerHTML = myQuestions[0].question;
 
     for (var i=0; i < 5; i++) {
         var btn = document.createElement("button");
         btn.innerText = myQuestions[0].potentialAnswers[i].answer;
+        btn.setAttribute("value", [i]);
         btn.setAttribute('class', 'btn btn-success btn-block');
         answerOptions.appendChild(btn);
+
+        // btn.addEventListener("click", function() {
+        //     alert('you chose' + btn.Value);
+        // });
+        btn.addEventListener("click", function() {
+            alert("testing");
+        });
     }
+
 }
 
 renderQuestions();
+
+
 
 
 function quizTimer() {

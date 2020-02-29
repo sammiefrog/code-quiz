@@ -1,10 +1,7 @@
 var questionCont = document.getElementById("question-content");
 
 var answerOptions = document.getElementById("answer-options");
-// var answerTwo = document.querySelector("#answer-two");
-// var answerThree = document.querySelector("#answer-three");
-// var answerFour = document.querySelector("#answer-four");
-
+// answerOptions.innerText = myQuestions[i].potentialAnswers[0];
 var myQuestions = [
     {
         question: 'Where was I born?',
@@ -53,15 +50,13 @@ var myQuestions = [
 ]
 
 function renderQuestions () {
+    questionCont.innerHTML = myQuestions[0].question;
 
-    for (i=0; i < myQuestions.length; i++) {
-        questionCont.innerHTML = myQuestions[i].question;
-
-        // var listAnswers = document.createElement('li');
-
-        // document.answerOptions.appendChild(listAnswers);
-
-        answerOptions.innerHTML = myQuestions[i].potentialAnswers;
+    for (var i=0; i < 5; i++) {
+        var btn = document.createElement("button");
+        btn.innerText = myQuestions[0].potentialAnswers[i].answer;
+        btn.setAttribute('class', 'btn btn-success btn-block');
+        answerOptions.appendChild(btn);
     }
 }
 

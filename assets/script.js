@@ -1,76 +1,57 @@
 var questionCont = document.getElementById("question-content");
 
 var answerOptions = document.getElementById("answer-options");
+
+
 // answerOptions.innerText = myQuestions[i].potentialAnswers[0];
 var myQuestions = [
     {
         question: 'Where was I born?',
-        potentialAnswers: [
-            {
-                id: 'a',
-                answer: 'Evanston, IL'
-            },
-            {
-                id: 'b',
-                answer: 'Milwaukee, WI'
-            },
-            {
-                id: 'c',
-                answer: 'Gary, IN'
-            },
-            {
-                id: 'd',
-                answer: "Park Ridge, IL"
-            }
-        ],
-        correctAnswer: 'a'
+        potentialAnswers: ['Evanston, IL', 'Milwaukee, WI', 'Gary, IN', 'Park Ridge, IL'],
+        correctAnswer: 'Evanston, IL'
     },
     {
         question: 'Where did I get my Bachelors Degreee?',
-        potentialAnswers: [
-            {
-                id: 'a',
-                answer: 'DePaul University'
-            },
-            {
-                id: 'b',
-                answer: 'Roosevelt University'
-            },
-            {
-                id: 'c',
-                answer: 'Vanderbilt University'
-            },
-            {
-                id: 'd',
-                answer: 'Illinois State University'
-            }
-        ],
-        correctAnswer: 'b'
+        potentialAnswers: ['DePaul University', 'Roosevelt University', 'Vanderbilt University', 'Illinois State University'],
+        correctAnswer: 'Roosevelt University'
     }
 ]
 
 
-function renderQuestions () {
+// function renderQuestions () {
     questionCont.innerHTML = myQuestions[0].question;
 
-    for (var i=0; i < 5; i++) {
+
+    for (var i=0; i < 4; i++) {
         var btn = document.createElement("button");
-        btn.innerText = myQuestions[0].potentialAnswers[i].answer;
-        btn.setAttribute("value", [i]);
+        btn.innerText = myQuestions[0].potentialAnswers[i];
+        btn.setAttribute("data-index", [i]);
         btn.setAttribute('class', 'btn btn-success btn-block');
         answerOptions.appendChild(btn);
 
-        // btn.addEventListener("click", function() {
-        //     alert('you chose' + btn.Value);
-        // });
-        btn.addEventListener("click", function() {
-            alert("testing");
-        });
+        btn.addEventListener("click", checkAnswers);
     }
 
-}
 
-renderQuestions();
+
+// }
+
+// renderQuestions();
+
+function checkAnswers (event) {
+
+    var userSelect = event.target.textContent;
+
+    var correctAnswer = myQuestions[0].correctAnswer;
+
+    if (userSelect === correctAnswer) {
+        alert("Correct!");
+    }
+    else {
+        alert("Wrong!");
+    }
+    console.log(correctAnswer);
+}
 
 
 

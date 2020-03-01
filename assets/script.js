@@ -2,6 +2,14 @@ var questionCont = document.getElementById("question-content");
 
 var answerOptions = document.getElementById("answer-options");
 
+var timerEl = document.getElementById("timer-element");
+var timeLeft = 60;
+
+var questionNumber = 0;
+
+var scoreKeeper = document.getElementById("score");
+var counter = 0;
+
 
 // answerOptions.innerText = myQuestions[i].potentialAnswers[0];
 var myQuestions = [
@@ -18,14 +26,13 @@ var myQuestions = [
 ]
 
 
-// function renderQuestions () {
-    questionCont.innerHTML = myQuestions[0].question;
+function renderQuestions () {
 
+    questionCont.innerHTML = myQuestions[questionNumber].question;
 
-    for (var i=0; i < 4; i++) {
+    for (var i=0; i < myQuestions.potentialAnswers[i].length; i++) {
         var btn = document.createElement("button");
-        btn.innerText = myQuestions[0].potentialAnswers[i];
-        btn.setAttribute("data-index", [i]);
+        btn.innerText = myQuestions[questionNumber].potentialAnswers[i];
         btn.setAttribute('class', 'btn btn-success btn-block');
         answerOptions.appendChild(btn);
 
@@ -34,31 +41,36 @@ var myQuestions = [
 
 
 
-// }
+}
 
-// renderQuestions();
 
 function checkAnswers (event) {
 
     var userSelect = event.target.textContent;
 
-    var correctAnswer = myQuestions[0].correctAnswer;
+    var correctAnswer = myQuestions[0].correctAnswer
 
     if (userSelect === correctAnswer) {
         alert("Correct!");
+        counter++;
+        scoreKeeper.innerText = ("Score: " + counter);
+        timeLeft += 10;
+        questionNumber += 1;
+        renderQuestions();
     }
     else {
         alert("Wrong!");
+        timeLeft -= 10;
+        questionNumber += 1;
+        renderQuestions();
     }
-    console.log(correctAnswer);
+    console.log(counter);
 }
 
 
 
 
 function quizTimer() {
-    var timeLeft = 60;
-    var timerEl = document.getElementById("timer-element");
 
     var timeInterval = setInterval(function() {
       timerEl.textContent = timeLeft + " seconds remaining";
@@ -73,6 +85,8 @@ function quizTimer() {
   }
 
 quizTimer();
+renderQuestions();
+
 
 // pseudo code:
 //first i need to grab the classes that i want to populate my questions into from the html - still deciding if i need a card for this or if i should just create li tags in a <ul> within a plain column

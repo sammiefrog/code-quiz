@@ -30,7 +30,7 @@ function renderQuestions () {
 
     questionCont.innerHTML = myQuestions[questionNumber].question;
 
-    for (var i=0; i < myQuestions.potentialAnswers[i].length; i++) {
+    for (var i=0; i < myQuestions[questionNumber].potentialAnswers.length; i++) {
         var btn = document.createElement("button");
         btn.innerText = myQuestions[questionNumber].potentialAnswers[i];
         btn.setAttribute('class', 'btn btn-success btn-block');

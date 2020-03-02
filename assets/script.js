@@ -1,18 +1,19 @@
+//Global variables
 var questionCont = document.getElementById("question-content");
-
 var answerOptions = document.getElementById("answer-options");
 
+//timer
 var timerEl = document.getElementById("timer-element");
 var timeLeft = 60;
 
+//I use this to move through questions
 var questionNumber = 0;
-var answerNumber = 0;
 
+//score keeper
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
 
-
-// answerOptions.innerText = myQuestions[i].potentialAnswers[0];
+//My questions for the quiz as an object
 var myQuestions = [
     {
         question: 'Where was I born?',
@@ -42,7 +43,7 @@ var myQuestions = [
 
 ]
 
-
+//This puts the question and answers on the page as buttons
 function renderQuestions () {
 
     questionCont.innerHTML = myQuestions[questionNumber].question;
@@ -57,10 +58,7 @@ function renderQuestions () {
 
 }
 
-function clearOldAns () {
-    answerOptions.innerHTML = "";
-}
-
+//Compares users selected answer with the correct answer then moves to the next question by calling the render questions function again and adding 1 to the questionNumber variable
 function checkAnswers (event) {
 
     var userSelect = event.target.textContent;
@@ -74,8 +72,6 @@ function checkAnswers (event) {
         timeLeft += 10;
         questionNumber += 1;
         clearOldAns();
-        // renderQuestions();
-
 
     }
     else {
@@ -86,12 +82,24 @@ function checkAnswers (event) {
     }
     renderQuestions();
 
-    console.log(counter);
+}
+
+//clears the answers from the previous question
+function clearOldAns () {
+    answerOptions.innerHTML = "";
+}
+
+function endGame () {
+     
+}
+
+function highScores() {
+
 }
 
 
 
-
+//Quiz timer that starts when page opens, and gets time added or subtracted with correct or incorrect answers
 function quizTimer() {
 
     var timeInterval = setInterval(function() {
@@ -101,24 +109,13 @@ function quizTimer() {
       if (timeLeft === 0) {
         timerEl.textContent = "";
         clearInterval(timeInterval);
+        endGame();
       }
   
     }, 1000);
   }
 
+//Calls the timer and the first question to pop up right when the page opens
 quizTimer();
 renderQuestions();
 
-
-// pseudo code:
-//first i need to grab the classes that i want to populate my questions into from the html - still deciding if i need a card for this or if i should just create li tags in a <ul> within a plain column
-//second i need to figure out how to write a for loop to populate a question and four answers at the same time, while knowing which answer is correct
-//the code needs to log the correct answer if it is selected, and add it to a 'score' section that i will also have to create
-//create a score/points section that logs correct answers
-//at the end of the quiz, i need to populate a high score page that keeps peoples names (input field) and the score they earned, and rates them against other people who have taken it, and stores the information
-//WHILE all this is happening i need an interval timer in the corner counting down from 60, a correct answer will add ten second, and an incorrect answer will deduct 10 seconds.
-//the quiz must end when the timer reaches 0, regardless of if all questions have been answered or not
-
-//key research points: high score page (storing user scores with inputted names in the app), 
-//keep functions at the top
-//if timer is 0 then stop the function

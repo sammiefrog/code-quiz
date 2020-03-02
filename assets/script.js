@@ -6,6 +6,7 @@ var timerEl = document.getElementById("timer-element");
 var timeLeft = 60;
 
 var questionNumber = 0;
+var answerNumber = 0;
 
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
@@ -35,14 +36,14 @@ function renderQuestions () {
         btn.innerText = myQuestions[questionNumber].potentialAnswers[i];
         btn.setAttribute('class', 'btn btn-success btn-block');
         answerOptions.appendChild(btn);
-
         btn.addEventListener("click", checkAnswers);
     }
 
-
-
 }
 
+// function clearOldAns () {
+//     answerOptions.removeChild(btn);
+// }
 
 function checkAnswers (event) {
 
@@ -57,12 +58,16 @@ function checkAnswers (event) {
         timeLeft += 10;
         questionNumber += 1;
         renderQuestions();
+        // clearOldAns();
+
     }
     else {
         alert("Wrong!");
         timeLeft -= 10;
         questionNumber += 1;
         renderQuestions();
+        // clearOldAns();
+
     }
     console.log(counter);
 }

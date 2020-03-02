@@ -23,7 +23,23 @@ var myQuestions = [
         question: 'Where did I get my Bachelors Degreee?',
         potentialAnswers: ['DePaul University', 'Roosevelt University', 'Vanderbilt University', 'Illinois State University'],
         correctAnswer: 'Roosevelt University'
+    },
+    {
+        question: 'What is my favorite animal?',
+        potentialAnswers: ['Red Panda', 'Sloth', 'Bearded Lizard', 'Frog'],
+        correctAnswer: 'Frog'
+    },
+    {
+        question: 'What pet do I have?',
+        potentialAnswers: ['A frog named Teddy', 'A ferret named Foxy', 'A cat named Bobbie', 'A dog named Rufus'],
+        correctAnswer: 'A cat named Bobbie'
+    },
+    {
+        question: 'Which one of these ethnicities am I NOT?',
+        potentialAnswers: ['Hungarian', 'Italian', 'German', 'Croatian'],
+        correctAnswer: 'German'
     }
+
 ]
 
 
@@ -41,15 +57,15 @@ function renderQuestions () {
 
 }
 
-// function clearOldAns () {
-//     answerOptions.removeChild(btn);
-// }
+function clearOldAns () {
+    answerOptions.innerHTML = "";
+}
 
 function checkAnswers (event) {
 
     var userSelect = event.target.textContent;
 
-    var correctAnswer = myQuestions[0].correctAnswer
+    var correctAnswer = myQuestions[questionNumber].correctAnswer
 
     if (userSelect === correctAnswer) {
         alert("Correct!");
@@ -57,18 +73,19 @@ function checkAnswers (event) {
         scoreKeeper.innerText = ("Score: " + counter);
         timeLeft += 10;
         questionNumber += 1;
-        renderQuestions();
-        // clearOldAns();
+        clearOldAns();
+        // renderQuestions();
+
 
     }
     else {
         alert("Wrong!");
         timeLeft -= 10;
         questionNumber += 1;
-        renderQuestions();
-        // clearOldAns();
-
+        clearOldAns();
     }
+    renderQuestions();
+
     console.log(counter);
 }
 

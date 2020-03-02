@@ -4,6 +4,7 @@ var answerOptions = document.getElementById("answer-options");
 
 //timer
 var timerEl = document.getElementById("timer-element");
+var timeInterval;
 var timeLeft = 60;
 
 //I use this to move through questions
@@ -12,6 +13,10 @@ var questionNumber = 0;
 //score keeper
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
+
+//High scores / storage
+var highScores = localStorage.getItem("high-scores");
+var scoreKept = [];
 
 //My questions for the quiz as an object
 var myQuestions = [
@@ -48,6 +53,7 @@ function renderQuestions () {
 
     questionCont.innerHTML = myQuestions[questionNumber].question;
 
+
     for (var i=0; i < myQuestions[questionNumber].potentialAnswers.length; i++) {
         var btn = document.createElement("button");
         btn.innerText = myQuestions[questionNumber].potentialAnswers[i];
@@ -55,6 +61,7 @@ function renderQuestions () {
         answerOptions.appendChild(btn);
         btn.addEventListener("click", checkAnswers);
     }
+
 
 }
 
@@ -70,52 +77,84 @@ function checkAnswers (event) {
         counter++;
         scoreKeeper.innerText = ("Score: " + counter);
         timeLeft += 10;
-        questionNumber += 1;
-        clearOldAns();
-
     }
+
     else {
         alert("Wrong!");
         timeLeft -= 10;
-        questionNumber += 1;
-        clearOldAns();
     }
-    renderQuestions();
 
-}
+    questionNumber ++;
 
-//clears the answers from the previous question
-function clearOldAns () {
+    questionCont.innerHTML = "";
     answerOptions.innerHTML = "";
+
+    if (questionNumber > 4) {
+        endGame();
+    }
+    else{
+        renderQuestions();
+    }
+
+
 }
 
-function endGame () {
+function endGame() {
+    localStorage.setItem("high-scores", JSON.stringify(counter));
+    localStorage.setItem("high-scores", counter);
+    scoreKept.push(counter);
+
+    questionCont.innerHTML = ("You scored " + counter + " points!");
+
+    scoreKeeper.innerText = " ";
+
+    var btnTwo = document.createElement("button");
+    btnTwo.innerText = "See High Scores!";
+    btnTwo.setAttribute('class', 'btn btn-success btn-block');
+    answerOptions.appendChild(btnTwo);
+    // btn.addEventListener("click", highScores);
+
+    clearInterval(timeInterval);
+    timerEl.textContent = "";
+
+}
+
+console.log(localStorage);
+
+
+//stops the game when the questions have all been answered
+// function endGame () {
+//     if(parseInt(questionNumber) > 5) {
+//         alert("You've Finished!")
+//         highScores();
+//     }
      
-}
+// }
 
-function highScores() {
+// function highScores() {
 
-}
+// }
 
 
 
 //Quiz timer that starts when page opens, and gets time added or subtracted with correct or incorrect answers
 function quizTimer() {
 
-    var timeInterval = setInterval(function() {
+    timeInterval = setInterval(function() {
       timerEl.textContent = timeLeft + " seconds remaining";
       timeLeft--;
   
-      if (timeLeft === 0) {
+    }, 1000);
+
+    if (timeLeft === 0) {
         timerEl.textContent = "";
         clearInterval(timeInterval);
         endGame();
       }
-  
-    }, 1000);
   }
 
 //Calls the timer and the first question to pop up right when the page opens
 quizTimer();
 renderQuestions();
+
 

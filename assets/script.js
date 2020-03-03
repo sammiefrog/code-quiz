@@ -13,6 +13,8 @@ var questionNumber = 0;
 //score keeper
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
+scoreKeeper.innerText = ("Score: " + counter);
+
 
 //High scores / storage
 var highScores = localStorage.getItem("high-scores");
@@ -75,7 +77,6 @@ function checkAnswers (event) {
     if (userSelect === correctAnswer) {
         alert("Correct!");
         counter++;
-        scoreKeeper.innerText = ("Score: " + counter);
         timeLeft += 10;
     }
 
@@ -102,7 +103,7 @@ function checkAnswers (event) {
 function endGame() {
     // localStorage.setItem("high-scores", counter);
     // localStorage.setItem("high-scores", JSON.stringify(counter));
-    
+
     scoreKept.push(counter);
     localStorage.setItem("high-scores", JSON.stringify(scoreKept));
 
@@ -112,10 +113,9 @@ function endGame() {
     questionCont.innerHTML = ("You scored " + counter + " points!");
 
     var userName = document.createElement("input");
-    // var userBtn = document.createElement("button");
+    userName.setAttribute("class", "form-control");
     userName.setAttribute("type", "text");
     userName.setAttribute("placeholder", "Enter your name here");
-    // userBtn.innerText = "Submit";
     
     questionCont.appendChild(userName);
     // questionCont.appendChild(userBtn);
@@ -134,11 +134,11 @@ function endGame() {
     btnTwo.addEventListener("click", highScores);
 
     function highScores () {
-
-
-
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
+
+        questionCont.innerText = "High Scores: ";
+
 
     
     }

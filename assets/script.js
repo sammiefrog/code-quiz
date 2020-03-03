@@ -100,13 +100,19 @@ function checkAnswers (event) {
 }
 
 function endGame() {
-    localStorage.setItem("high-scores", JSON.stringify(counter));
-    localStorage.setItem("high-scores", counter);
-    scoreKept.push(counter);
 
     questionCont.innerHTML = ("You scored " + counter + " points!");
-    answerOptions.innerHTML = " ";
 
+    var userName = document.createElement("input");
+    // var userBtn = document.createElement("button");
+    userName.setAttribute("type", "text");
+    userName.setAttribute("placeholder", "Enter your name here");
+    // userBtn.innerText = "Submit";
+    
+    questionCont.appendChild(userName);
+    // questionCont.appendChild(userBtn);
+
+    answerOptions.innerHTML = " ";
     scoreKeeper.innerText = " ";
 
     var btnTwo = document.createElement("button");
@@ -123,15 +129,10 @@ function endGame() {
     
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
-    
-        var userName = document.createElement("input");
-        var userBtn = document.createElement("button");
-        userName.setAttribute("type", "text");
-        userName.setAttribute("value", "Enter your name here");
-        userBtn.innerText = "Submit";
-    
-        questionCont.appendChild(userName);
-        questionCont.appendChild(userBtn);
+
+        localStorage.setItem("high-scores", JSON.stringify(counter));
+        localStorage.setItem("high-scores", counter);
+        scoreKept.push(counter);
     
     }
 

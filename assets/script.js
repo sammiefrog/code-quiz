@@ -13,7 +13,6 @@ var questionNumber = 0;
 //score keeper
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
-scoreKeeper.innerText = ("Score: " + counter);
 
 
 //High scores / storage
@@ -86,7 +85,7 @@ function checkAnswers (event) {
     }
 
     questionNumber ++;
-
+    scoreKeeper.innerHTML = ("Score: " + counter);
     questionCont.innerHTML = "";
     answerOptions.innerHTML = "";
 
@@ -112,12 +111,13 @@ function endGame() {
 
     questionCont.innerHTML = ("You scored " + counter + " points!");
 
-    var userName = document.createElement("input");
-    userName.setAttribute("class", "form-control");
-    userName.setAttribute("type", "text");
-    userName.setAttribute("placeholder", "Enter your name here");
+    var inputField = document.createElement("input");
+    inputField.setAttribute("class", "form-control");
+    inputField.setAttribute("type", "text");
+    inputField.setAttribute("id", "userInput");
+    inputField.setAttribute("placeholder", "Enter your name here");
     
-    questionCont.appendChild(userName);
+    questionCont.appendChild(inputField);
     // questionCont.appendChild(userBtn);
 
     answerOptions.innerHTML = " ";
@@ -131,13 +131,28 @@ function endGame() {
     clearInterval(timeInterval);
     timerEl.textContent = "";
 
-    btnTwo.addEventListener("click", highScores);
+    // btnTwo.addEventListener("click", highScores);
+    btnTwo.addEventListener("click", () => {
+        var userNameVal = document.getElementById("userInput").value;
+        console.log(userNameVal);
+
+        highScores();
+      });
 
     function highScores () {
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
 
         questionCont.innerText = "High Scores: ";
+
+        var scoreList = document.createElement('ul');
+        answerOptions.appendChild(scoreList);
+
+        for(var i=0; i< 10; i++) {
+            var userScores = document.createElement('li');
+            scoreList.appendChild(userScores);
+
+        }
 
 
     

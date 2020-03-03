@@ -100,6 +100,14 @@ function checkAnswers (event) {
 }
 
 function endGame() {
+    // localStorage.setItem("high-scores", counter);
+    // localStorage.setItem("high-scores", JSON.stringify(counter));
+    
+    scoreKept.push(counter);
+    localStorage.setItem("high-scores", JSON.stringify(scoreKept));
+
+    // localStorage.setItem("high-scores", scoreKept);
+
 
     questionCont.innerHTML = ("You scored " + counter + " points!");
 
@@ -126,19 +134,19 @@ function endGame() {
     btnTwo.addEventListener("click", highScores);
 
     function highScores () {
-    
+
+
+
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
 
-        localStorage.setItem("high-scores", JSON.stringify(counter));
-        localStorage.setItem("high-scores", counter);
-        scoreKept.push(counter);
     
     }
-
+    console.log(localStorage); 
+    console.log(scoreKept);
 }
 
-console.log(localStorage); 
+
 
 
 

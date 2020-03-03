@@ -41,7 +41,7 @@ var myQuestions = [
         correctAnswer: 'A cat named Bobbie'
     },
     {
-        question: 'Which one of these ethnicities am I NOT?',
+        question: 'Which one of these nationalities am I NOT?',
         potentialAnswers: ['Hungarian', 'Italian', 'German', 'Croatian'],
         correctAnswer: 'German'
     }
@@ -105,6 +105,7 @@ function endGame() {
     scoreKept.push(counter);
 
     questionCont.innerHTML = ("You scored " + counter + " points!");
+    answerOptions.innerHTML = " ";
 
     scoreKeeper.innerText = " ";
 
@@ -112,28 +113,31 @@ function endGame() {
     btnTwo.innerText = "See High Scores!";
     btnTwo.setAttribute('class', 'btn btn-success btn-block');
     answerOptions.appendChild(btnTwo);
-    // btn.addEventListener("click", highScores);
 
     clearInterval(timeInterval);
     timerEl.textContent = "";
 
+    btnTwo.addEventListener("click", highScores);
+
+    function highScores () {
+    
+        questionCont.innerHTML = "";
+        answerOptions.innerHTML = "";
+    
+        var userName = document.createElement("input");
+        var userBtn = document.createElement("button");
+        userName.setAttribute("type", "text");
+        userName.setAttribute("value", "Enter your name here");
+        userBtn.innerText = "Submit";
+    
+        questionCont.appendChild(userName);
+        questionCont.appendChild(userBtn);
+    
+    }
+
 }
 
-console.log(localStorage);
-
-
-//stops the game when the questions have all been answered
-// function endGame () {
-//     if(parseInt(questionNumber) > 5) {
-//         alert("You've Finished!")
-//         highScores();
-//     }
-     
-// }
-
-// function highScores() {
-
-// }
+console.log(localStorage); 
 
 
 
@@ -144,17 +148,19 @@ function quizTimer() {
       timerEl.textContent = timeLeft + " seconds remaining";
       timeLeft--;
   
-    }, 1000);
-
-    if (timeLeft === 0) {
-        timerEl.textContent = "";
-        clearInterval(timeInterval);
+      if (timeLeft === 0) {
+        // timerEl.textContent = "";
+        // clearInterval(timeInterval);
         endGame();
       }
-  }
+
+    }, 1000);
+
+
+}
 
 //Calls the timer and the first question to pop up right when the page opens
-quizTimer();
 renderQuestions();
 
+quizTimer();
 

@@ -14,21 +14,8 @@ var questionNumber = 0;
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
 
-//High scores 
-// var scoreKept = [];
+//High scores that were saved, and adding new ones to it
 const savedArray = JSON.parse(localStorage.getItem("high-scores")) || [];
-
-// var savedArray = JSON.parse(localStorage.getItem("high-scores"));
-
-
-// if (localStorage.getItem("high-scores") == null) {
-//     localStorage.setItem("high-scores", "no scores yet"); 
-//     var savedArray = JSON.parse(localStorage["high-scores"])
-    // JSON.parse(localStorage.getItem("high-scores"));
-// }
-// else {
-//     var savedArray = JSON.parse(localStorage["high-scores"]);
-// }
 
 //My questions for the quiz as an object
 var myQuestions = [
@@ -60,7 +47,7 @@ var myQuestions = [
 
 ]
 
-//This puts the question and answers on the page as buttons
+//This puts the question and answers on the page as buttons and on a click of the answer, moves to the checkAnswer function
 function renderQuestions () {
 
     questionCont.innerHTML = myQuestions[questionNumber].question;
@@ -79,7 +66,7 @@ function renderQuestions () {
 
 //Compares users selected answer with the correct answer then moves to the next question by calling the render questions function again and adding 1 to the questionNumber variable
 function checkAnswers (event) {
-
+//targeting the text of the button
     var userSelect = event.target.textContent;
 
     var correctAnswer = myQuestions[questionNumber].correctAnswer
@@ -97,6 +84,7 @@ function checkAnswers (event) {
 
     questionNumber ++;
     scoreKeeper.innerHTML = ("Score: " + counter);
+    //clears the space for the next question and answers
     questionCont.innerHTML = "";
     answerOptions.innerHTML = "";
 
@@ -111,9 +99,10 @@ function checkAnswers (event) {
 }
 
 function endGame() {
-
+//shows the final score at the top
     questionCont.innerHTML = ("You scored " + counter + " points!");
 
+//create an input field to enter users name
     var inputField = document.createElement("input");
     inputField.setAttribute("class", "form-control");
     inputField.setAttribute("type", "text");
@@ -122,9 +111,11 @@ function endGame() {
     
     questionCont.appendChild(inputField);
 
+//clears the answer section and the scorekeeper on the side
     answerOptions.innerHTML = " ";
     scoreKeeper.innerText = " ";
 
+//creates a button that will grab the users name
     var btnTwo = document.createElement("button");
     btnTwo.innerText = "See High Scores!";
     btnTwo.setAttribute('class', 'btn btn-success btn-block');
@@ -133,16 +124,10 @@ function endGame() {
     clearInterval(timeInterval);
     timerEl.textContent = "";
 
-    // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
-        // scoreKept.push(counter);
-        // savedArray.push(counter);
-
-
+    //when the button is clicked it pushes the user name and the score(counter) to the constant saved array (high scores), and calls the function for high score page
         var userNameVal = document.getElementById("userInput").value;
-        // scoreKept.push(userNameVal);
-        savedArray.push("Name: " + userNameVal + "  Score: " + counter);
-
+        savedArray.push("Score: " + counter + "  //  Name: " + userNameVal);
 
         alert(userNameVal);
 
@@ -150,20 +135,26 @@ function endGame() {
       });
 
     function highScores () {
-
+        //clears the card to add new info
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
-        // localStorage["savedArray"] = JSON.stringify(savedArray);
-        // localStorage.setItem("high-scores", JSON.stringify(savedArray));
+        //setting the new score to the high-score saved array
         localStorage.setItem("high-scores", JSON.stringify(savedArray));
+        //attempting to sort numerically
+        savedArray.sort();
+        // savedArray.sort ((x, y) => {
+        // return y.counter - x.counter;
+        // });
 
+        //heading on the high score page
         questionCont.innerText = "High Scores: ";
-
+        //creating an unordered list within the answerOptions section
         var scoreList = document.createElement('ul');
         answerOptions.appendChild(scoreList);
-
+        //creating a new li for each new high score
         for(var i=0; i < savedArray.length; i++) {
             var allTheScores = document.createElement('li');
+            allTheScores.setAttribute('class', 'list-group-item text-left');
             allTheScores.innerText = (savedArray[i]);
             scoreList.appendChild(allTheScores);
         }
@@ -185,8 +176,7 @@ function quizTimer() {
       timeLeft--;
   
       if (timeLeft === 0) {
-        // timerEl.textContent = "";
-        // clearInterval(timeInterval);
+
         endGame();
       }
 

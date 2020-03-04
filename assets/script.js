@@ -14,10 +14,16 @@ var questionNumber = 0;
 var scoreKeeper = document.getElementById("score");
 var counter = 0;
 
-
-//High scores / storage
-var highScores = localStorage.getItem("high-scores");
+//High scores 
 var scoreKept = [];
+
+if (localStorage.getItem("high-scores") == null) {
+    localStorage.setItem("high-scores", "no scores yet"); 
+    var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+}
+else {
+    var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+}
 
 //My questions for the quiz as an object
 var myQuestions = [
@@ -100,14 +106,6 @@ function checkAnswers (event) {
 }
 
 function endGame() {
-    // localStorage.setItem("high-scores", counter);
-    // localStorage.setItem("high-scores", JSON.stringify(counter));
-
-    scoreKept.push(counter);
-    localStorage.setItem("high-scores", JSON.stringify(scoreKept));
-
-    // localStorage.setItem("high-scores", scoreKept);
-
 
     questionCont.innerHTML = ("You scored " + counter + " points!");
 
@@ -118,7 +116,6 @@ function endGame() {
     inputField.setAttribute("placeholder", "Enter your name here");
     
     questionCont.appendChild(inputField);
-    // questionCont.appendChild(userBtn);
 
     answerOptions.innerHTML = " ";
     scoreKeeper.innerText = " ";
@@ -133,28 +130,33 @@ function endGame() {
 
     // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
+        scoreKept.push(counter);
+
         var userNameVal = document.getElementById("userInput").value;
-        console.log(userNameVal);
+        scoreKept.push(userNameVal);
+
+        alert(userNameVal);
 
         highScores();
       });
 
     function highScores () {
+
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
+
+        localStorage.setItem("high-scores", JSON.stringify(scoreKept));
 
         questionCont.innerText = "High Scores: ";
 
         var scoreList = document.createElement('ul');
         answerOptions.appendChild(scoreList);
 
-        for(var i=0; i< 10; i++) {
+        for(var i=0; i < savedArray.length; i++) {
             var userScores = document.createElement('li');
+            userScores.innerText = (savedArray);
             scoreList.appendChild(userScores);
-
         }
-
-
     
     }
     console.log(localStorage); 

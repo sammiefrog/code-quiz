@@ -136,12 +136,12 @@ function endGame() {
     // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
         // scoreKept.push(counter);
-        savedArray.push(counter);
+        // savedArray.push(counter);
 
 
         var userNameVal = document.getElementById("userInput").value;
         // scoreKept.push(userNameVal);
-        savedArray.push(userNameVal);
+        savedArray.push("Name: " + userNameVal + "  Score: " + counter);
 
 
         alert(userNameVal);

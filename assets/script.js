@@ -164,13 +164,13 @@ function endGame() {
 
         for(var i=0; i < savedArray.length; i++) {
             var allTheScores = document.createElement('li');
-            allTheScores.innerText = (savedArray);
+            allTheScores.innerText = (savedArray[i]);
             scoreList.appendChild(allTheScores);
         }
     
     }
     console.log(localStorage); 
-    console.log(scoreKept);
+    console.log(savedArray);
 }
 
 

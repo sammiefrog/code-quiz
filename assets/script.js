@@ -15,15 +15,23 @@ var scoreKeeper = document.getElementById("score");
 var counter = 0;
 
 //High scores 
-var scoreKept = [];
+var scoreKept = [
+    {
+        userName: "",
+        userScore: ""
+    }
+];
 
-if (localStorage.getItem("high-scores") == null) {
-    localStorage.setItem("high-scores", "no scores yet"); 
-    var savedArray = JSON.parse(localStorage.getItem("high-scores"));
-}
-else {
-    var savedArray = JSON.parse(localStorage.getItem("high-scores"));
-}
+var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+
+
+// if (localStorage.getItem("high-scores") == null) {
+//     localStorage.setItem("high-scores", "no scores yet"); 
+//     var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+// }
+// else {
+//     var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+// }
 
 //My questions for the quiz as an object
 var myQuestions = [
@@ -130,10 +138,10 @@ function endGame() {
 
     // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
-        scoreKept.push(counter);
+        scoreKept[0].push(counter);
 
         var userNameVal = document.getElementById("userInput").value;
-        scoreKept.push(userNameVal);
+        scoreKept[1].push(userNameVal);
 
         alert(userNameVal);
 
@@ -153,9 +161,9 @@ function endGame() {
         answerOptions.appendChild(scoreList);
 
         for(var i=0; i < savedArray.length; i++) {
-            var userScores = document.createElement('li');
-            userScores.innerText = (savedArray);
-            scoreList.appendChild(userScores);
+            var allTheScores = document.createElement('li');
+            allTheScores.innerText = (savedArray);
+            scoreList.appendChild(allTheScores);
         }
     
     }

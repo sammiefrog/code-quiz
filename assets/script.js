@@ -15,22 +15,19 @@ var scoreKeeper = document.getElementById("score");
 var counter = 0;
 
 //High scores 
-var scoreKept = [
-    {
-        // userName: [],
-        // userScore: []
-    }
-];
+// var scoreKept = [];
+const savedArray = JSON.parse(localStorage.getItem("high-scores")) || [];
 
-var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+// var savedArray = JSON.parse(localStorage.getItem("high-scores"));
 
 
 // if (localStorage.getItem("high-scores") == null) {
 //     localStorage.setItem("high-scores", "no scores yet"); 
-//     var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+//     var savedArray = JSON.parse(localStorage["high-scores"])
+    // JSON.parse(localStorage.getItem("high-scores"));
 // }
 // else {
-//     var savedArray = JSON.parse(localStorage.getItem("high-scores"));
+//     var savedArray = JSON.parse(localStorage["high-scores"]);
 // }
 
 //My questions for the quiz as an object
@@ -138,10 +135,14 @@ function endGame() {
 
     // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
-        scoreKept.push(counter);
+        // scoreKept.push(counter);
+        savedArray.push(counter);
+
 
         var userNameVal = document.getElementById("userInput").value;
-        scoreKept.push(userNameVal);
+        // scoreKept.push(userNameVal);
+        savedArray.push(userNameVal);
+
 
         alert(userNameVal);
 
@@ -152,8 +153,9 @@ function endGame() {
 
         questionCont.innerHTML = "";
         answerOptions.innerHTML = "";
-
-        localStorage.setItem("high-scores", JSON.stringify(scoreKept));
+        // localStorage["savedArray"] = JSON.stringify(savedArray);
+        // localStorage.setItem("high-scores", JSON.stringify(savedArray));
+        localStorage.setItem("high-scores", JSON.stringify(savedArray));
 
         questionCont.innerText = "High Scores: ";
 

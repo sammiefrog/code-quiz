@@ -17,8 +17,8 @@ var counter = 0;
 //High scores 
 var scoreKept = [
     {
-        userName: "",
-        userScore: ""
+        // userName: [],
+        // userScore: []
     }
 ];
 
@@ -138,10 +138,10 @@ function endGame() {
 
     // btnTwo.addEventListener("click", highScores);
     btnTwo.addEventListener("click", () => {
-        scoreKept[0].push(counter);
+        scoreKept.push(counter);
 
         var userNameVal = document.getElementById("userInput").value;
-        scoreKept[1].push(userNameVal);
+        scoreKept.push(userNameVal);
 
         alert(userNameVal);
 

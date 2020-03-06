@@ -95,7 +95,6 @@ function checkAnswers (event) {
         renderQuestions();
     }
 
-
 }
 
 function endGame() {
@@ -142,9 +141,6 @@ function endGame() {
         localStorage.setItem("high-scores", JSON.stringify(savedArray));
         //attempting to sort numerically
         savedArray.sort();
-        // savedArray.sort ((x, y) => {
-        // return y.counter - x.counter;
-        // });
 
         //heading on the high score page
         questionCont.innerText = "High Scores: ";

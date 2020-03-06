@@ -5,7 +5,7 @@
 https://sammiefrog.github.io/code-quiz/
 
 ## Description
-
+This is a quiz made with javascript for functionality, with questions about me to test how well people know me. You earn points when you get questions correct, and you also earn more time. When you answer incorrectly you lose ten seconds. At the end you can save your name and score.
 
 ## Technology Stack
 HTML, Bootstrap, Javascript
@@ -14,6 +14,7 @@ HTML, Bootstrap, Javascript
 @sammiefrog
 
 ## Usage
+To test your knowledge on me as a person.
 
 ## Credits
 www.w3schools.com 
